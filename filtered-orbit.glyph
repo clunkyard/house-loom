@@ -1,0 +1,31 @@
+# Classic 2D workshop: build a controller from value-transforming words.
+# The turn command approaches its target by at most 0.08 each decision;
+# that filter keeps its history even when a contact appears or disappears.
+bot Filtered Orbit
+modes 2d
+rulesets classic
+memory steering 0
+
+# ( desired -- filtered ): store the new command and leave it for a setter.
+: slew
+  steering@ - 0.08 neg 0.08 clamp steering@ + dup steering!
+;
+
+# ( target-heading -- turn-command )
+: steer-towards heading angle 45 / clamp1 slew ;
+
+# ( -- target-heading ): leave a value, rather than write a control here.
+: course
+  contact if bearing 90 + else heading 18 + then
+;
+
+: target
+  bearing dup aim! scan-heading!
+  20 scan-arc!
+  1 power!
+  cooldown 0 = aim-error abs 3 < and battery 20 >= and fire!
+;
+
+course steer-towards dup turn! status-value!
+battery 20 < if 0.2 else 0.45 then drive!
+contact if target else heading tick 12 * + scan-heading! 40 scan-arc! then

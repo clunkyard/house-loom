@@ -1,0 +1,17 @@
+bot Orbital Coast
+modes 3d
+rulesets zero-g
+
+# A short burn establishes velocity. Zero thrust then demonstrates true coast.
+tick 28 < if
+  1 thrust!
+  0.32 yaw-torque!
+else
+  0 thrust!
+  0 yaw-torque!
+then
+false brake!
+
+heading tick 6 * + scan-heading!
+tick 24 / sin 28 * scan-pitch!
+58 scan-arc!

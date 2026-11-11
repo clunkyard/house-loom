@@ -1,0 +1,10 @@
+{
+  "id": "workshop-filtered-orbit",
+  "name": "Filtered Orbit",
+  "language": "Glyph DSL",
+  "protocol": 2,
+  "supportedModes": ["2d"],
+  "supportedRulesets": ["classic"],
+  "resourceModes": ["open", "dsl"],
+  "command": ["node", "src/dsl/runner.js", "glyph", "bots/dsl/glyph/filtered-orbit.glyph"]
+}

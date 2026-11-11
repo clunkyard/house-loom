@@ -1,0 +1,165 @@
+# Loom hunts with a weave: a nine-second sine swing across its target's
+# line of fire, whose phase it keeps in memory, so the rhythm carries on
+# from one contact to the next. It closes to about 260 and leads every
+# shot; with nothing in sight it roams towards a passive cue. Count the
+# rhythm: the swing slows and turns on the same beat.
+bot Loom
+modes 2d 3d
+rulesets classic inertial-2d gravity-flat gravity-hills zero-g
+memory weave 0
+memory lb 0
+memory le 0
+memory lt 0
+memory w 0
+memory we 0
+memory d 0
+memory side 1
+memory pw 1
+memory sp 300
+memory sol 0
+memory sole 0
+memory vl 0
+memory rr 0
+memory dx 0
+memory dy 0
+memory dz 0
+
+# 1 while the battery is under a third.
+: low  energy-fraction 0.3 < ;
+
+# Sweep a 40 degree arc (about 520 reach) round the circle, nodding it in
+# 3D; hold it still on the tick a robot appears so the lock starts there.
+: sweep
+  contact if bearing else scan-heading 36 + then scan-heading!
+  mode3 if contact if elevation else tick 7 * sin 30 * then scan-pitch! then
+  40 scan-arc!
+;
+
+# Bearing and elevation change between echoes, in degrees a tick; a gap or
+# a jump to another robot resets them.
+: rates
+  tick lt@ - 2 > if heading bearing angle 0 < if 1 neg else 1 then side! then
+  contact tick lt@ - 2 <= and bearing lb@ angle abs 10 < and if
+    bearing lb@ angle tick lt@ - 1 max / w!
+    elevation le@ - tick lt@ - 1 max / we!
+  else 0 w! 0 we! then
+  bearing lb! elevation le! tick lt!
+;
+
+: engage
+  rates
+  # The heaviest shot that arrives within a second.
+  shot-speed-base range 1 / - shot-speed-per-power neg / power-min power-max clamp dup pw! power!
+  shot-speed-base shot-speed-per-power pw@ * + sp!
+  # Lead: relative crossing speed from the bearing change (20 ticks a
+  # second). Classic shots do not carry our own speed, so add it back:
+  # full drive is 95 a second, and 95 * 57.3 = 5443 in degrees. In the
+  # force rulesets d is 0, since shots there inherit our velocity.
+  w@ 20 * range * 5443 d@ * heading bearing - sin * + sp@ / 30 neg 30 clamp bearing + dup sol! aim!
+  # Gravity drops a shot by g t^2 / 2 over t = range / speed; 28.65 is
+  # 57.3 / 2, in degrees.
+  we@ 20 * range * sp@ / 20 neg 20 clamp elevation + gravity-z neg 28.65 * range * sp@ dup * / + dup sole! aim-pitch!
+  bearing w@ + scan-heading!
+  elevation we@ + scan-pitch!
+  20 scan-arc!
+  cooldown 0 = sol@ aim angle abs 2.5 < and sole@ aim-pitch - abs 2.5 < and range 700 < and
+  energy fire-base fire-per-power pw@ * + 6 + >= and fire!
+;
+
+# The weave keeps its phase between contacts. Classic reverses its phase
+# near a north or south wall; forces apply their velocity bounds in fly.
+: weave-step
+  weave@ 2 + weave!
+  physics-mode not if
+    y heading sin weave@ sin * 70 * + dup 40 < swap height 40 - > or
+    if weave@ 180 + weave! then
+  then
+;
+
+# Classic: body across the line of sight, driving forward and back with
+# the weave, angled in or out to hold 260.
+: drive-weave
+  weave-step
+  weave@ sin 3 * clamp1 0.65 0.35 low * - * d!
+  d@ drive!
+  bearing side@ 90 d@ range 260 - 4 / 35 neg 35 clamp * - * + heading angle 20 / clamp1 turn!
+  elevation 0.5 * pitch - 20 / clamp1 pitch-turn!
+;
+
+: roam
+  0.6 low 0.25 * - dup d! drive!
+  cue-present if cue-bearing heading angle 45 / clamp1 else
+  heading cos height 2 / y - * heading sin width 2 / x - * - 80 / clamp1 0.7 * 0.25 + then turn!
+  pitch neg 20 / clamp1 pitch-turn!
+;
+
+: escape
+  # Out across the storm's path, on the side away from its centre: square
+  # to its heading, leaning a third of the way to straight out.
+  storm-bearing 180 + dup storm-heading angle 100 * 1 neg 1 clamp 90 * storm-heading +
+  swap over angle 3 / +
+;
+
+# The storm in classic: drive out across its path, still shooting.
+: storm-run
+  escape heading angle 20 / clamp1 turn!
+  pitch neg 20 / clamp1 pitch-turn!
+  1 dup d! drive!
+;
+
+# Sudden death in classic: back inside the safe zone, still shooting.
+: zone-run
+  zone-bearing heading angle 20 / clamp1 turn!
+  zone-elevation pitch - 20 / clamp1 pitch-turn!
+  zone-distance zone-radius 0.4 * - 60 / 0.2 0.8 clamp dup d! drive!
+;
+
+# Force rulesets: build a desired velocity (dx, dy, dz) and push the hull
+# towards it with thrust, strafe and lift, facing the target.
+: fly-weave
+  weave-step
+  60 energy-fraction 2 * 0.2 - 0.25 1 clamp * weave@ sin 2 * clamp1 * vl!
+  range 260 - 0.65 * 70 neg 70 clamp energy-fraction 2 * 0.3 1 clamp * rr!
+  bearing sin neg vl@ * elevation cos bearing cos * rr@ * + dx!
+  bearing cos vl@ * elevation cos bearing sin * rr@ * + dy!
+  mode3 gravity not and if elevation sin rr@ * else 0 then dz!
+  bearing heading angle 70 / yaw-rate 60 / - clamp1 yaw-torque!
+;
+
+: fly-roam
+  cue-present if cue-bearing cos 60 * dx! cue-bearing sin 60 * dy! else
+  width 2 / x - 0.3 * 60 neg 60 clamp tick 4 * cos 45 * + dx!
+  height 2 / y - 0.3 * 60 neg 60 clamp tick 4 * sin 45 * + dy!
+  then
+  mode3 gravity not and if depth 2 / z - 0.3 * 40 neg 40 clamp else 0 then dz!
+  0.3 yaw-rate 60 / - clamp1 yaw-torque!
+;
+
+: fly
+  0 d!
+  contact if fly-weave else fly-roam then
+  gravity if terrain-height 115 + z - 1.2 * 35 neg 35 clamp dz! then
+  dx@ 80 x - 1.5 * max width 80 - x - 1.5 * min dx!
+  dy@ 80 y - 1.5 * max height 80 - y - 1.5 * min dy!
+  mode3 if dz@ 80 z - 1.5 * max depth 80 - z - 1.5 * min dz! then
+  storm-distance 80 < if escape dup cos 80 * dx! sin 80 * dy! then
+  zone-active if zone-distance zone-radius 0.75 * > if
+    zone-bearing cos zone-elevation cos * zone-distance zone-radius 0.4 * - 10 80 clamp * dx!
+    zone-bearing sin zone-elevation cos * zone-distance zone-radius 0.4 * - 10 80 clamp * dy!
+    mode3 gravity not and if zone-elevation sin zone-distance zone-radius 0.4 * - 10 80 clamp * dz! then
+  then then
+  dx@ vx - forward-x * dy@ vy - forward-y * + dz@ vz - forward-z * + 50 / clamp1 thrust!
+  dx@ vx - right-x * dy@ vy - right-y * + dz@ vz - right-z * + 50 / clamp1 strafe!
+  mode3 if
+    dx@ vx - up-x * dy@ vy - up-y * + dz@ vz - up-z * + 50 / gravity-z neg 100 / + clamp1 lift!
+    pitch neg 40 / pitch-rate 60 / - clamp1 pitch-torque!
+    roll-rate neg 60 / clamp1 roll-torque!
+  then
+;
+
+contact if engage else sweep then
+physics-mode if fly else
+  contact if drive-weave else roam then
+  storm-distance 80 < if storm-run then
+  zone-active if zone-distance zone-radius 0.75 * > if zone-run then then
+then

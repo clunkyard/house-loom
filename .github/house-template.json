@@ -1,0 +1,118 @@
+{
+  "v": 1,
+  "repository": "clunkyard/house-loom",
+  "source": {
+    "botId": "4e134c0d-f5e1-4686-b880-4abe70c5c251",
+    "revisionId": "7082e81d-e1cd-412a-9983-a6a28b32c66a",
+    "manifestHash": "abdb5fb0d3925689ddd93ce81d38f4277d0da808272559703f05ec6b7fb8f97a"
+  },
+  "visibleManifestHash": "abdb5fb0d3925689ddd93ce81d38f4277d0da808272559703f05ec6b7fb8f97a",
+  "language": "glyph",
+  "sourceFiles": [
+    {
+      "path": "SPEC.md",
+      "mode": 384,
+      "size": 12085,
+      "sha256": "f56802a1cb15aa42f755f4449ed528d45925766b2abf08567c1669c515242df5"
+    },
+    {
+      "path": "bot.json",
+      "mode": 420,
+      "size": 711,
+      "sha256": "ca85c42f746e25175f706ff613a5ea025317651afdc796e58c9e54c2d568502e"
+    },
+    {
+      "path": "filtered-orbit.glyph",
+      "mode": 384,
+      "size": 946,
+      "sha256": "c2715a63a8286b17c7fe6c0172c056abcc00deb32f145ba9cb32f198d2280c7a"
+    },
+    {
+      "path": "filtered-orbit.json",
+      "mode": 384,
+      "size": 302,
+      "sha256": "a111436ce15ab658af8f9f4e83b30119a1f198d6547612ff2d7f3ad42c04f6d6"
+    },
+    {
+      "path": "loom.glyph",
+      "mode": 384,
+      "size": 6294,
+      "sha256": "3cf6af7864d105de8df85a250610e1799ff39e4fd1d951225ae906ffd02197f4"
+    },
+    {
+      "path": "minimal.glyph",
+      "mode": 384,
+      "size": 885,
+      "sha256": "303df511555a4b1808ed6c2c4f399ffa015a2b14b884c0f5d66603d6fdfe90c5"
+    },
+    {
+      "path": "orbital-coast.glyph",
+      "mode": 384,
+      "size": 296,
+      "sha256": "bc38b3922b3613f8b3513587e7969f33a2f94ed7259cf7f5e956ae5ca4436684"
+    }
+  ],
+  "directories": [],
+  "managed": [
+    {
+      "path": ".clunkyard-source.json",
+      "sha256": "275f0611c5ea62c4562d17a5915b0108a600423309775f6fd3b6e47d97cf17d0",
+      "mode": 420
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "e8b41e5528b2d3a8ae4c5dabfcd32ef50c05fff41de096c3701059b5c68a80db",
+      "mode": 420
+    },
+    {
+      "path": "bot.json",
+      "sha256": "88b271c0d5ba0ee255b27c202af04c3d347af6a95972ca96cd6d35d32f06779c",
+      "mode": 420
+    },
+    {
+      "path": "filtered-orbit.glyph",
+      "sha256": "c2715a63a8286b17c7fe6c0172c056abcc00deb32f145ba9cb32f198d2280c7a",
+      "mode": 384
+    },
+    {
+      "path": "filtered-orbit.json",
+      "sha256": "a111436ce15ab658af8f9f4e83b30119a1f198d6547612ff2d7f3ad42c04f6d6",
+      "mode": 384
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "652cbd0ba5e21c5b7ee7a52b539cc9087b38b1bfc3ae0baacc6828c8dfdf2e95",
+      "mode": 420
+    },
+    {
+      "path": "loom.glyph",
+      "sha256": "3cf6af7864d105de8df85a250610e1799ff39e4fd1d951225ae906ffd02197f4",
+      "mode": 384
+    },
+    {
+      "path": "Makefile",
+      "sha256": "b41bef136a1fec767be62431121a98d96259ccd8415fc3d71665b22efcd8f79d",
+      "mode": 420
+    },
+    {
+      "path": "minimal.glyph",
+      "sha256": "303df511555a4b1808ed6c2c4f399ffa015a2b14b884c0f5d66603d6fdfe90c5",
+      "mode": 384
+    },
+    {
+      "path": "orbital-coast.glyph",
+      "sha256": "bc38b3922b3613f8b3513587e7969f33a2f94ed7259cf7f5e956ae5ca4436684",
+      "mode": 384
+    },
+    {
+      "path": "README.md",
+      "sha256": "ea5a90c5ee36ea137c2b338bd921dc7f2305708304a8539c0c462199e8097384",
+      "mode": 420
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "f56802a1cb15aa42f755f4449ed528d45925766b2abf08567c1669c515242df5",
+      "mode": 384
+    }
+  ]
+}

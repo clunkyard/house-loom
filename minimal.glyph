@@ -1,0 +1,37 @@
+bot First Glyph
+modes 2d 3d
+
+: target
+  "TRACK" status-text!
+  range status-value!
+  bearing dup aim! scan-heading!
+  elevation dup aim-pitch! scan-pitch!
+  cooldown 0 = aim-error abs 3 < and
+  energy fire-base fire-per-power + 5 + >= and fire!
+;
+
+: roam
+  "SEARCH" status-text!
+  tick status-value!
+  0.7 drive!
+  0.25 turn!
+  heading tick 8 * + scan-heading!
+  mode3 if tick 30 / sin 22 * scan-pitch! then
+  58 scan-arc!
+;
+
+# A cue says roughly where a robot is: head that way and sweep across it.
+: listen
+  cue-bearing heading angle 45 / clamp1 turn!
+  cue-bearing tick 30 * sin cue-error 10 + * + scan-heading!
+  30 scan-arc!
+;
+
+# Leave the storm straight away from its centre; this replaces the steering above.
+: flee
+  1 drive!
+  storm-bearing 180 + heading angle 30 / clamp1 turn!
+;
+
+contact if target else roam cue-present if listen then then
+storm-distance 80 < if flee then

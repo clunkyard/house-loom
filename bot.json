@@ -1,0 +1,29 @@
+{
+  "name": "Loom",
+  "language": "glyph",
+  "protocol": 2,
+  "strategy": "Hunts at close range on a slow nine-second weave that keeps its rhythm between contacts, leading every shot. Time your shots to the turn of its swing.",
+  "entry": "loom.glyph",
+  "supportedModes": [
+    "2d",
+    "3d"
+  ],
+  "resourceModes": [
+    "open",
+    "dsl"
+  ],
+  "supportedRulesets": [
+    "classic",
+    "inertial-2d",
+    "gravity-flat",
+    "gravity-hills",
+    "zero-g"
+  ],
+  "command": [
+    "node",
+    "src/dsl/runner.js",
+    "glyph",
+    "bots/dsl/glyph/loom.glyph"
+  ],
+  "publicDescription": "Hunts at close range on a slow nine-second weave and leads every shot. Time your shots to the turn of its swing."
+}
