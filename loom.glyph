@@ -69,7 +69,7 @@ memory dz 0
 # The weave keeps its phase between contacts. Classic reverses its phase
 # near a north or south wall; forces apply their velocity bounds in fly.
 : weave-step
-  weave@ 2 + weave!
+  weave@ 2.2 + weave!
   physics-mode not if
     y heading sin weave@ sin * 70 * + dup 40 < swap height 40 - > or
     if weave@ 180 + weave! then

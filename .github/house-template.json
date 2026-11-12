@@ -3,10 +3,10 @@
   "repository": "clunkyard/house-loom",
   "source": {
     "botId": "4e134c0d-f5e1-4686-b880-4abe70c5c251",
-    "revisionId": "7082e81d-e1cd-412a-9983-a6a28b32c66a",
-    "manifestHash": "abdb5fb0d3925689ddd93ce81d38f4277d0da808272559703f05ec6b7fb8f97a"
+    "revisionId": "c258ae24-6251-41b9-b430-19f8ebe982ed",
+    "manifestHash": "0ceb11143d93dc7c91fb6a150a1c80e8fe431dea8e8eeacc55e040e4ca6c8620"
   },
-  "visibleManifestHash": "abdb5fb0d3925689ddd93ce81d38f4277d0da808272559703f05ec6b7fb8f97a",
+  "visibleManifestHash": "0ceb11143d93dc7c91fb6a150a1c80e8fe431dea8e8eeacc55e040e4ca6c8620",
   "language": "glyph",
   "sourceFiles": [
     {
@@ -36,8 +36,8 @@
     {
       "path": "loom.glyph",
       "mode": 384,
-      "size": 6294,
-      "sha256": "3cf6af7864d105de8df85a250610e1799ff39e4fd1d951225ae906ffd02197f4"
+      "size": 6296,
+      "sha256": "80d351e01da61c111324d55c214490723b1157076e8867e72b52377f227a7232"
     },
     {
       "path": "minimal.glyph",
@@ -56,7 +56,7 @@
   "managed": [
     {
       "path": ".clunkyard-source.json",
-      "sha256": "275f0611c5ea62c4562d17a5915b0108a600423309775f6fd3b6e47d97cf17d0",
+      "sha256": "5b13b062c77141fb5e0dfdbe749b575ac3fd66882be2e50f11c8d6b785b71125",
       "mode": 420
     },
     {
@@ -86,12 +86,12 @@
     },
     {
       "path": "loom.glyph",
-      "sha256": "3cf6af7864d105de8df85a250610e1799ff39e4fd1d951225ae906ffd02197f4",
+      "sha256": "80d351e01da61c111324d55c214490723b1157076e8867e72b52377f227a7232",
       "mode": 384
     },
     {
       "path": "Makefile",
-      "sha256": "b41bef136a1fec767be62431121a98d96259ccd8415fc3d71665b22efcd8f79d",
+      "sha256": "56113b1e7b8c900f9222ffed6cfba3382ff4835729e887cab6e75fbf991b4157",
       "mode": 420
     },
     {
@@ -106,7 +106,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "ea5a90c5ee36ea137c2b338bd921dc7f2305708304a8539c0c462199e8097384",
+      "sha256": "dc6b13ae2345a8c3938d48b3c3154de033ad18d096b14d1f4dbaaa94157bae07",
       "mode": 420
     },
     {
