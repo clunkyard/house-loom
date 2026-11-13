@@ -3,7 +3,7 @@
   "repository": "clunkyard/house-loom",
   "source": {
     "botId": "4e134c0d-f5e1-4686-b880-4abe70c5c251",
-    "revisionId": "c258ae24-6251-41b9-b430-19f8ebe982ed",
+    "revisionId": "e4155438-3476-434b-bbb6-d42dc6bdfcfc",
     "manifestHash": "0ceb11143d93dc7c91fb6a150a1c80e8fe431dea8e8eeacc55e040e4ca6c8620"
   },
   "visibleManifestHash": "0ceb11143d93dc7c91fb6a150a1c80e8fe431dea8e8eeacc55e040e4ca6c8620",
@@ -56,7 +56,7 @@
   "managed": [
     {
       "path": ".clunkyard-source.json",
-      "sha256": "5b13b062c77141fb5e0dfdbe749b575ac3fd66882be2e50f11c8d6b785b71125",
+      "sha256": "17e912f5c4ed78f8bfcf129499f726e26f81a27beb5b13f4ac00f0bbdd5d1bc2",
       "mode": 420
     },
     {
