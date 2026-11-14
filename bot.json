@@ -1,6 +1,6 @@
 {
   "name": "Loom",
-  "language": "glyph",
+  "language": "Glyph DSL",
   "protocol": 2,
   "strategy": "Hunts at close range on a slow nine-second weave that keeps its rhythm between contacts, leading every shot. Time your shots to the turn of its swing.",
   "entry": "loom.glyph",
